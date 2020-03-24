@@ -27,6 +27,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         return user
 
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.name = validated_data.get('name', instance.name)
+        instance.save()
+
+        return instance
+
 
 class ProfileFeedItemSerializer(serializers.ModelSerializer):
     """A serializer for profile feed item."""
